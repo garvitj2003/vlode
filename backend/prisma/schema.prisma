@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User{
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   email String @unique
   name String
   password String
@@ -22,8 +22,9 @@ model User{
 }
 
 model Post{
-  id String @id @default(uuid())
-  authourId String
+  id Int @id @default(autoincrement())
+  // Sorry there is a typo
+  authourId Int
   title String
   content String
   published Boolean @default(false)
