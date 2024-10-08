@@ -105,11 +105,40 @@ blogRouter.get("key/:id", async (c) => {
   }
 });
 
-// Route to get blogs in feed, but still need to add a pagination algo
+// Route to get random blogs max 10 at a time.
 
 blogRouter.get("/bulk", async (c) => {
   const prisma = c.get("prisma");
+  const limit = 10; // Number of blogs to return
 
-  const blog = await prisma.post.findMany();
-  return c.json({ blog });
+  try {
+    // Fetch all existing blog IDs
+    const allBlogs = await prisma.post.findMany({
+      select: { id: true }, // Only fetch the `id` field
+    });
+
+    const existingIds = allBlogs.map((blog: any) => blog.id);
+
+    // Helper function to shuffle array and pick the first 'n' elements
+    const getRandomIds = (ids: number[], limit: number): number[] => {
+      return ids
+        .sort(() => 0.5 - Math.random()) // Shuffle the array
+        .slice(0, limit); // Pick the first 'n' shuffled elements
+    };
+
+    // Get 10 random blog IDs from the existing IDs
+    const randomIds = getRandomIds(existingIds, limit);
+
+    // Fetch blogs with the random IDs
+    const blogs = await prisma.post.findMany({
+      where: {
+        id: { in: randomIds },
+      },
+    });
+
+    return c.json({ blogs });
+  } catch (error) {
+    console.error(error);
+    return c.json({ error: "Failed to fetch blogs" }, 500);
+  }
 });
