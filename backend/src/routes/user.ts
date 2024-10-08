@@ -29,12 +29,20 @@ userRouter.post("/signup", async (c) => {
   if (!success) {
     return c.json({ error: "inputs are not correct" });
   }
+  // Hash the password using Web Crypto API
+  const encoder = new TextEncoder();
+  const data = encoder.encode(body.password);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashedPassword = hashArray
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
   const prisma = c.get("prisma");
   try {
     const user = await prisma.user.create({
       data: {
         email: body.email,
-        password: body.password,
+        password: hashedPassword,
         name: body.name,
       },
     });
@@ -55,12 +63,20 @@ userRouter.post("/signin", async (c) => {
   if (!success) {
     return c.json({ error: "inputs are not correct" });
   }
+  // Hash the password using Web Crypto API
+  const encoder = new TextEncoder();
+  const data = encoder.encode(body.password);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashedPassword = hashArray
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
   const prisma = c.get("prisma");
   try {
     const user = await prisma.user.findUnique({
       where: {
         email: body.email,
-        password: body.password,
+        password: hashedPassword,
       },
     });
 
