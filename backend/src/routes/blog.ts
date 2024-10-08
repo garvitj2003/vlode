@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { Prisma, PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { verify } from "hono/jwt";
+import { createBlogInput, updateBlogInput } from "@garvit__nmps/zod-common";
 
 export const blogRouter = new Hono<{
   Bindings: {
@@ -14,7 +15,7 @@ export const blogRouter = new Hono<{
   };
 }>();
 
-// A hack to make prisma client available globally.
+// A hack to make accelerated prisma client available globally.
 blogRouter.use("/*", async (c, next) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -40,6 +41,10 @@ blogRouter.use("/*", async (c, next) => {
 // Route to post blog
 blogRouter.post("/", async (c) => {
   const body = await c.req.json();
+  const { success } = createBlogInput.safeParse(body);
+  if (!success) {
+    return c.json({ msg: "sent wrong inputs" });
+  }
   const userId = c.get("userId");
   const prisma = c.get("prisma");
   try {
@@ -54,37 +59,50 @@ blogRouter.post("/", async (c) => {
   } catch (e) {
     console.log(e);
     c.status(411);
-    return c.json({ message: "couldnt upload blog" });
+    return c.json({ message: "could not upload blog" });
   }
 });
 
 // Route to edit blog
 blogRouter.put("/", async (c) => {
-  const prisma = c.get("prisma");
   const body = await c.req.json();
-
-  const blog = await prisma.post.update({
-    data: {
-      title: body.title,
-      content: body.content,
-    },
-    where: {
-      id: body.id,
-    },
-  });
+  const { success } = updateBlogInput.safeParse(body);
+  if (!success) {
+    c.status(411);
+    return c.json({ msg: "sent wrong inputs" });
+  }
+  const prisma = c.get("prisma");
+  try {
+    const blog = await prisma.post.update({
+      data: {
+        title: body.title,
+        content: body.content,
+      },
+      where: {
+        id: body.id,
+      },
+    });
+  } catch {
+    c.status(411);
+    return c.json({ error: "could not update blog" });
+  }
 });
 
 // Route to get a blog by id
 blogRouter.get("key/:id", async (c) => {
   const prisma = c.get("prisma");
   const id = c.req.param("id");
-
-  const blog = await prisma.post.findUnique({
-    where: {
-      id: Number(id),
-    },
-  });
-  return c.json({ blog });
+  try {
+    const blog = await prisma.post.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+    return c.json({ id });
+  } catch {
+    c.status(411);
+    return c.json({ msg: "blog not found" });
+  }
 });
 
 // Route to get blogs in feed, but still need to add a pagination algo

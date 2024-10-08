@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { sign } from "hono/jwt";
-
+import { signinInput, signupInputs } from "@garvit__nmps/zod-common";
 export const userRouter = new Hono<{
   Bindings: {
     DATABASE_URL: string;
@@ -13,7 +13,7 @@ export const userRouter = new Hono<{
   };
 }>();
 
-// A hack to make prisma client available globally.
+// A hack to make accelertated prisma client available globally.
 userRouter.use("/*", async (c, next) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -25,6 +25,10 @@ userRouter.use("/*", async (c, next) => {
 // Signup Route
 userRouter.post("/signup", async (c) => {
   const body = await c.req.json();
+  const { success } = signupInputs.safeParse(body);
+  if (!success) {
+    return c.json({ error: "inputs are not correct" });
+  }
   const prisma = c.get("prisma");
   try {
     const user = await prisma.user.create({
@@ -46,9 +50,12 @@ userRouter.post("/signup", async (c) => {
 
 // Signin Route
 userRouter.post("/signin", async (c) => {
-  const prisma = c.get("prisma");
-
   const body = await c.req.json();
+  const { success } = signinInput.safeParse(body);
+  if (!success) {
+    return c.json({ error: "inputs are not correct" });
+  }
+  const prisma = c.get("prisma");
   try {
     const user = await prisma.user.findUnique({
       where: {
