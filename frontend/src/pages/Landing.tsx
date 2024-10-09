@@ -1,0 +1,93 @@
+import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+
+const Landing = () => {
+  const navigate = useNavigate();
+  const navigateToSignup = () => {
+    navigate("/signup");
+  };
+  return (
+    <div className="h-screen flex-col flex justify-between w-11/12 md:w-3/4">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="py-4 md:py-6 flex justify-between border-b border-black font-popins">
+          <p className="text-2xl md:text-3xl font-bold text-darkGray tracking-tight ">
+            Vlode
+          </p>
+          <div className="inline-flex items-baseline text-sm text-mediumGray gap-6 ">
+            <Link
+              to="/signup"
+              className="hover:text-darkGray  invisible md:visible transition-all ease-in-out duration-500"
+            >
+              Write
+            </Link>
+            <Link
+              to="/signin"
+              className="hover:text-darkGray transition-all ease-in-out duration-500"
+            >
+              Signin
+            </Link>
+            <button
+              onClick={navigateToSignup}
+              className="bg-darkGray hover:bg-black  py-2 px-4 transition-all ease-in-out duration-500 text-white tracking-tighter rounded-full font-semibold"
+            >
+              Get started
+            </button>
+          </div>
+        </div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="w-3/5 font-popins ">
+          <h2 className=" text-5xl md:text-8xl text-darkGray ">
+            Innovation Paths & Reflections
+          </h2>
+          <h3 className="text-mediumGray text-lg md:text-xl tracking-tighter my-2 md:my-4">
+            A Hub for Reading, Sharing & Inspiring Ideas!
+          </h3>
+          <button className="hover:bg-black bg-darkGray transition-all ease-in-out duration-500 text-white px-4 py-2 md:px-6 md:my-2 font-semibold rounded-full">
+            Start Reading
+          </button>
+        </div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="text-center text-lg text-mediumGray m-2 border-t border-black">
+          Made with{" "}
+          <motion.span
+            animate={{
+              y: [0, -2, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
+            className="inline-block"
+          >
+            ❤️
+          </motion.span>{" "}
+          by{" "}
+          <a
+            target="_blank"
+            href="https://x.com/GarvitXalt"
+            className="border-b border-black italic hover:text-black transition-all ease-in-out duration-500"
+          >
+            Garvit
+          </a>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+export default Landing;
