@@ -3,15 +3,38 @@ import LabelledInput from "../components/LabelledInput";
 import { SigninInput } from "@garvit__nmps/zod-common";
 import Quote from "../components/Quote";
 import AuthCard from "../components/AuthCard";
+import axios from "axios";
+import { backendUrl } from "../config";
+import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const [input, setInput] = useState<SigninInput>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+
+  // To send signin request to backend
+  const signinRequest = async () => {
+    try {
+      const response = await axios.post(
+        `${backendUrl}/api/v1/user/signin`,
+        input
+      );
+      const jwt = response.data;
+      localStorage.setItem("token", jwt);
+      navigate("/home");
+    } catch (e) {
+      // alert the user about req fail
+    }
+  };
+
+  // Handle form submit
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    signinRequest();
   };
+
   return (
     <div className="h-screen flex w-4/5 lg:grid lg:grid-cols-2 lg:gap-8 justify-center items-center font-popins lg:w-full overflow-hidden">
       <AuthCard

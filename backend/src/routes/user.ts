@@ -47,7 +47,7 @@ userRouter.post("/signup", async (c) => {
       },
     });
     const token = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json(`Bearer ${token}`);
+    return c.json(`${token}`);
   } catch (e) {
     c.status(411);
     return c.json({
@@ -88,8 +88,8 @@ userRouter.post("/signin", async (c) => {
     }
 
     const token = await sign({ id: user.id }, c.env.JWT_SECRET);
-    return c.json(`Bearer ${token}`);
+    return c.json(`${token}`);
   } catch {
-    c.json({ error: "wrong credentials" }, 411);
+    c.json({ error: "Something wrong with backend" }, 411);
   }
 });

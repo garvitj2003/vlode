@@ -16,6 +16,7 @@ const LabelledInput = ({
     <div className="flex flex-col font-popins w-full lg:w-1/2">
       <label className="mx-2 text-md font-medium">{label}</label>
       <input
+        required
         type={type}
         placeholder={placeholder}
         onChange={onChange}

@@ -8,7 +8,7 @@ interface AuthCardTypes {
   link: string;
   buttonText: string;
   handleSubmit: any;
-  children: React.ReactNode;
+  children: React.ReactNode; // can have functional components as an input
 }
 
 const AuthCard = ({
