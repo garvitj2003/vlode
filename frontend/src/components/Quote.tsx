@@ -8,8 +8,10 @@ const Quote = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1 }}
     >
-      <h2 className=" text-8xl text-darkGray ">Welcome to Vlode</h2>
-      <h2 className="text-7xl text-mediumGray">Your Ideas, Amplified</h2>
+      <h2 className=" text-8xl text-darkGray font-Pacifico font-extralight">
+        Welcome to Vlode
+      </h2>
+      <h2 className="text-5xl text-mediumGray">Your Ideas, Amplified</h2>
     </motion.div>
   );
 };

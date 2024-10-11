@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         popins: ["Poppins", "sans-serif"],
+        Pacifico: ["Pacifico", "sans-serif"],
       },
       colors: {
         white: "#ffffff",
