@@ -15,7 +15,7 @@ const Landing = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="py-4 md:py-6 flex justify-between border-b border-black font-popins">
-          <p className="text-2xl md:text-3xl font-bold text-darkGray tracking-tight ">
+          <p className="text-2xl md:text-3xl text-darkGray  font-Pacifico">
             Vlode
           </p>
           <div className="inline-flex items-baseline text-sm text-mediumGray gap-6 ">
