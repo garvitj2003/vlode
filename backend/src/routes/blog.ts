@@ -134,6 +134,16 @@ blogRouter.get("/bulk", async (c) => {
       where: {
         id: { in: randomIds },
       },
+      select: {
+        title: true,
+        content: true,
+        published: true,
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
 
     return c.json({ blogs });
