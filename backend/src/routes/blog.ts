@@ -10,8 +10,8 @@ export const blogRouter = new Hono<{
     JWT_SECRET: string;
   };
   Variables: {
-    userId: any;
-    prisma: any;
+    userId: any; //couldn't find out its type if you did know please leave a comment
+    prisma: any; //couldn't find out its type if you did know please leave a comment
   };
 }>();
 
@@ -88,6 +88,24 @@ blogRouter.put("/", async (c) => {
   }
 });
 
+// Route to get details about user and all of his blogs(for user profile page)
+blogRouter.get("/user", async (c) => {
+  const prisma = c.get("prisma");
+  const userId = c.get("userId");
+  try {
+    const userDetails = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        name: true,
+        email: true,
+        posts: true,
+      },
+    });
+    return c.json({ userDetails });
+  } catch {}
+});
 // Route to get a blog by id
 blogRouter.get("key/:id", async (c) => {
   const prisma = c.get("prisma");
