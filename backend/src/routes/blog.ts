@@ -153,6 +153,7 @@ blogRouter.get("/bulk", async (c) => {
         id: { in: randomIds },
       },
       select: {
+        id: true,
         title: true,
         content: true,
         published: true,
