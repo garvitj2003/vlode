@@ -14,6 +14,9 @@ export default {
         lightBeige: "#f7f4ed",
         mediumGray: "#6b6b6b",
       },
+      animation: {
+        "spin-slow": "spin 3s ease infinite",
+      },
     },
   },
   plugins: [],

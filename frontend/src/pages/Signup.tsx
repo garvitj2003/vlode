@@ -14,9 +14,11 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   // Send signup request to backend
   const signupRequest = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         `${backendUrl}/api/v1/user/signup`,
@@ -24,6 +26,7 @@ const Signup = () => {
       );
       const jwt = response.data;
       localStorage.setItem("token", jwt);
+      setLoading(false);
       navigate("/home"); // navigate to home page
     } catch (e) {
       // alert the user about req fail
@@ -44,6 +47,7 @@ const Signup = () => {
         link={"signin"}
         buttonText={"Sign up"}
         handleSubmit={handleSubmit}
+        loading={loading}
       >
         <LabelledInput
           type="text"

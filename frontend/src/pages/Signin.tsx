@@ -12,10 +12,12 @@ const Signin = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   // To send signin request to backend
   const signinRequest = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         `${backendUrl}/api/v1/user/signin`,
@@ -23,8 +25,11 @@ const Signin = () => {
       );
       const jwt = response.data;
       localStorage.setItem("token", jwt);
+      setLoading(false);
       navigate("/home");
     } catch (e) {
+      alert("couldnt find user");
+      setLoading(false);
       // alert the user about req fail
     }
   };
@@ -43,6 +48,7 @@ const Signin = () => {
         link={"signup"}
         buttonText={"Sign in"}
         handleSubmit={handleSubmit}
+        loading={loading}
       >
         <LabelledInput
           type="email"

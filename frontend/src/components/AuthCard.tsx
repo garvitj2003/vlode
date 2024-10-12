@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Loader } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -8,6 +9,7 @@ interface AuthCardTypes {
   link: string;
   buttonText: string;
   handleSubmit: any;
+  loading: boolean;
   children: React.ReactNode; // can have functional components as an input
 }
 
@@ -17,6 +19,7 @@ const AuthCard = ({
   link,
   buttonText,
   handleSubmit,
+  loading,
   children,
 }: AuthCardTypes) => {
   return (
@@ -42,10 +45,10 @@ const AuthCard = ({
       {children}
 
       <button
-        className="hover:bg-black bg-darkGray transition-all ease-in-out duration-500 text-white px-4 py-2 w-1/2 md:px-6 md:my-2 font-semibold rounded-full"
+        className="hover:bg-black flex justify-center bg-darkGray transition-all ease-in-out duration-500 text-white px-4 py-2 w-1/2 md:px-6 md:my-2 font-semibold rounded-full"
         type="submit"
       >
-        {buttonText}
+        {loading ? <Loader className=" animate-spin-slow " /> : buttonText}
       </button>
     </motion.form>
   );
