@@ -28,8 +28,8 @@ const Signin = () => {
       setLoading(false);
       navigate("/home");
     } catch (e) {
-      alert("couldnt find user");
       setLoading(false);
+      alert("couldnt find user");
       // alert the user about req fail
     }
   };

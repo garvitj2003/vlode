@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronRight, User } from "lucide-react";
+import { motion } from "framer-motion";
+
 interface blogTypes {
   title: string;
   content: string;
@@ -11,7 +13,12 @@ export const BlogCard = ({ title, content, author, published }: blogTypes) => {
   const truncatedContent =
     content.length > 40 ? content.slice(0, 100) + "..." : content;
   return (
-    <div className="max-w-lg bg-white overflow-hidden border-b border-mediumGray shadow-lg">
+    <motion.div
+      initial={{ opacity: 0.5, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="max-w-lg bg-white overflow-hidden border-b border-mediumGray shadow-md  hover:shadow-2xl duration-500"
+    >
       <div className="md:p-6 p-2 ">
         <div className="flex items-center md:mb-4 mb-1">
           <div className="w-8 h-8 rounded-full bg-darkGray opacity-80 flex items-center justify-center mr-4">
@@ -34,6 +41,6 @@ export const BlogCard = ({ title, content, author, published }: blogTypes) => {
           <ChevronRight className="ml-1 h-4 w-4" />
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };

@@ -26,7 +26,7 @@ const AuthCard = ({
     <motion.form
       initial={{ opacity: 0, x: -100 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
       className="flex flex-col w-full justify-center items-center gap-8 my-4 "
       onSubmit={handleSubmit}
     >

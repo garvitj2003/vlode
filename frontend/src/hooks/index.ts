@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { backendUrl } from "../config";
 
 interface Blog {
+  id: number;
   title: string;
   content: string;
   published: string;
@@ -12,7 +13,7 @@ interface Blog {
 }
 
 export const useBlogs = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {

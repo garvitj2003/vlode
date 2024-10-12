@@ -29,7 +29,9 @@ const Signup = () => {
       setLoading(false);
       navigate("/home"); // navigate to home page
     } catch (e) {
+      setLoading(false);
       // alert the user about req fail
+      alert("couldn't complete your request");
     }
   };
 

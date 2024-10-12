@@ -21,7 +21,7 @@ const Footer = () => {
           }}
           className="inline-block"
         >
-          ❤️
+          {/* ❤️ */}🖤
         </motion.span>{" "}
         by{" "}
         <a

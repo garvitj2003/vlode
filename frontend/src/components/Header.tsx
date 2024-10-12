@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="flex justify-between w-11/12 p-2 border-b border-darkGray">
+    <div className="flex justify-between sticky top-0 z-50 bg-transparent backdrop-blur-lg w-11/12 p-2 border-b border-darkGray">
       <p className="text-2xl md:text-3xl text-darkGray  font-Pacifico">Vlode</p>
       <div className="inline-flex items-baseline">
         <a

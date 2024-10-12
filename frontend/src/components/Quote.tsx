@@ -6,7 +6,7 @@ const Quote = () => {
       className="hidden lg:block ml-5"
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5 }}
     >
       <h2 className=" text-8xl text-darkGray font-Pacifico font-extralight">
         Welcome to Vlode
