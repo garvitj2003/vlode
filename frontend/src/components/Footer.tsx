@@ -8,22 +8,7 @@ const Footer = () => {
       transition={{ duration: 1 }}
     >
       <div className="text-center text-lg text-mediumGray m-2 border-t border-black">
-        Made with{" "}
-        <motion.span
-          animate={{
-            y: [0, -2, 0],
-          }}
-          transition={{
-            duration: 1.5,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "loop",
-          }}
-          className="inline-block"
-        >
-          {/* ❤️ */}🖤
-        </motion.span>{" "}
-        by{" "}
+        Designed and developed by{" "}
         <a
           target="_blank"
           href="https://x.com/GarvitXalt"

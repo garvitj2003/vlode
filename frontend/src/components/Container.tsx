@@ -3,6 +3,7 @@ import { BlogCard } from "../components/BlogCard";
 import { useBlogs } from "../hooks";
 import { Skeleton } from "./Skeleton";
 import { DropDown } from "./DropDown";
+import Footer from "./Footer";
 const Container = () => {
   const { loading, blogs } = useBlogs();
 
@@ -24,7 +25,7 @@ const Container = () => {
     );
   }
 
-  // Function to give date into a pretty format
+  // Function to give date a pretty format
   const formatDate = (dateTimeString: string) => {
     const dateString = dateTimeString.split("T")[0]; // Extract date part
     const date = new Date(dateString);
@@ -53,6 +54,7 @@ const Container = () => {
               />
             ))}
       </div>
+      <Footer />
     </div>
   );
 };

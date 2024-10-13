@@ -35,3 +35,25 @@ export const useBlogs = () => {
     blogs,
   };
 };
+
+// hook to fetch a single blog from backend
+export const useSingleBlog = (id: number) => {
+  const [loading, setLoading] = useState(true);
+  const [blog, setBlog] = useState<Blog>();
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/api/v1/blog/key/${id}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setBlog(response.data.blog);
+        setLoading(false);
+      });
+  }, []);
+  return {
+    loading,
+    blog,
+  };
+};
