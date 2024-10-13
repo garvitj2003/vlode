@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BlogCard } from "../components/BlogCard";
 import { useBlogs } from "../hooks";
 import { Skeleton } from "./Skeleton";
+import { DropDown } from "./DropDown";
 const Container = () => {
   const { loading, blogs } = useBlogs();
 
@@ -27,12 +28,14 @@ const Container = () => {
   const formatDate = (dateTimeString: string) => {
     const dateString = dateTimeString.split("T")[0]; // Extract date part
     const date = new Date(dateString);
-    const options: any = { year: "numeric", month: "short", day: "numeric" };
+    const options: object = { year: "numeric", month: "short", day: "numeric" };
     return date.toLocaleDateString("en-US", options);
   };
   return (
     <div className="grid lg:grid-cols-3 gap-4 mx-4 w-11/12">
-      <div></div>
+      <div className="min-w-96">
+        <DropDown />
+      </div>
       <div className="col-span-2 grid lg:grid-cols-2 gap-2">
         {loading
           ? // Create an array of length 6 and map over it to render 6 Skeleton components
