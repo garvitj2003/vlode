@@ -44,6 +44,7 @@ const Container = () => {
               .map((_, index) => <Skeleton key={index} />)
           : blogs.map((blogs) => (
               <BlogCard
+                id={blogs.id}
                 key={blogs.id}
                 title={blogs.title}
                 content={blogs.content}

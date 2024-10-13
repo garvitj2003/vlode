@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { backendUrl } from "../config";
 
+// Blog types
 interface Blog {
   id: number;
   title: string;
@@ -12,6 +13,7 @@ interface Blog {
   };
 }
 
+// Hook to fetch blogs from the backend
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<Blog[]>([]);

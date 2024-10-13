@@ -3,15 +3,25 @@ import { ChevronRight, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface blogTypes {
+  id: number;
   title: string;
   content: string;
   author: string;
   published: string;
 }
-export const BlogCard = ({ title, content, author, published }: blogTypes) => {
+
+// Blog card component
+export const BlogCard = ({
+  id,
+  title,
+  content,
+  author,
+  published,
+}: blogTypes) => {
   const truncatedTitle = title.length > 40 ? title.slice(0, 40) + "..." : title;
   const truncatedContent =
     content.length > 40 ? content.slice(0, 100) + "..." : content;
+
   return (
     <motion.div
       initial={{ opacity: 0.5, y: -10 }}
@@ -34,7 +44,7 @@ export const BlogCard = ({ title, content, author, published }: blogTypes) => {
         </h3>
         <p className="text-gray-600 mb-2 md:mb-4">{truncatedContent}</p>
         <Link
-          to="/"
+          to={`/blog/${id}`}
           className="inline-flex items-center text-sm font-medium text-blue-500 hover:underline"
         >
           Read more
