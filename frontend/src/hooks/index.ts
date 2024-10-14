@@ -12,7 +12,17 @@ interface Blog {
     name: string;
   };
 }
-
+interface User {
+  name: string;
+  email: string;
+  posts: object;
+}
+interface Posts {
+  id: number;
+  title: string;
+  content: string;
+  published: string;
+}
 // Hook to fetch blogs from the backend
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true);
@@ -38,7 +48,6 @@ export const useBlogs = () => {
 
 // hook to fetch a single blog from backend
 export const useSingleBlog = (id: number) => {
-  const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<Blog>();
   useEffect(() => {
     axios
@@ -49,11 +58,32 @@ export const useSingleBlog = (id: number) => {
       })
       .then((response) => {
         setBlog(response.data.blog);
-        setLoading(false);
       });
   }, []);
   return {
-    loading,
     blog,
+  };
+};
+
+// Hook to get details about user
+
+export const useUserDetails = () => {
+  const [userDetails, setUserDetails] = useState<User>();
+  const [posts, setPosts] = useState<Posts[]>([]);
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/api/v1/blog/user`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        setUserDetails(response.data.userDetails);
+        setPosts(response.data.userDetails.posts);
+      });
+  }, []);
+  return {
+    userDetails,
+    posts,
   };
 };

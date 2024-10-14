@@ -4,7 +4,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
-
+import UserPage from "./pages/User";
 export const App = () => {
   return (
     <BrowserRouter>
@@ -14,6 +14,7 @@ export const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/user" element={<UserPage />} />
           <Route path="/blog/:id" element={<Blog />} />
         </Routes>
       </div>

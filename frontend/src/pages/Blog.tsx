@@ -12,7 +12,7 @@ const Blog = () => {
     navigate("/home");
   };
   // Function to give date a pretty format
-  const formatDate = (dateTimeString: string) => {
+  const formatDate: any = (dateTimeString: string) => {
     const dateString = dateTimeString.split("T")[0]; // Extract date part
     const date = new Date(dateString);
     const options: object = { year: "numeric", month: "short", day: "numeric" };
