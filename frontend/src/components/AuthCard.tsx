@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { Loader } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { visitToken } from "../config";
 
 interface AuthCardTypes {
   heading: string;
@@ -22,6 +23,14 @@ const AuthCard = ({
   loading,
   children,
 }: AuthCardTypes) => {
+  const navigate = useNavigate();
+
+  // function to take visitor recruiter direct in without login/signup
+  const takeMeIn = () => {
+    localStorage.setItem("token", visitToken);
+    navigate("/home");
+  };
+
   return (
     <motion.form
       initial={{ opacity: 0, x: -100 }}
@@ -49,6 +58,12 @@ const AuthCard = ({
         type="submit"
       >
         {loading ? <Loader className=" animate-spin-slow " /> : buttonText}
+      </button>
+      <button
+        className="bg-transparent text-sm text-darkGray hover:text-black underline duration-200 ease"
+        onClick={takeMeIn}
+      >
+        I am a Visitor/Recruiter take me in
       </button>
     </motion.form>
   );

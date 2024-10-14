@@ -1,10 +1,11 @@
 import { User } from "lucide-react";
-
 import { useUserDetails } from "../hooks";
 import { BlogCard } from "../components/BlogCard";
+import { useNavigate } from "react-router-dom";
 
 const UserPage = () => {
   const { userDetails, posts } = useUserDetails();
+  const navigate = useNavigate();
 
   // Function to give date a pretty format
   const formatDate = (dateTimeString: string) => {
@@ -12,6 +13,12 @@ const UserPage = () => {
     const date = new Date(dateString);
     const options: object = { year: "numeric", month: "short", day: "numeric" };
     return date.toLocaleDateString("en-US", options);
+  };
+
+  // Function for user Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   if (!userDetails) {
@@ -34,7 +41,7 @@ const UserPage = () => {
           </div>
 
           <button
-            // onClick={handleLogout} // Add your logout function here
+            onClick={handleLogout} // Add your logout function here
             className="px-4 py-1 bg-red-500 text-white rounded-full hover:bg-red-700 font-popins ease duration-200"
           >
             Logout
