@@ -5,10 +5,13 @@ import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import UserPage from "./pages/User";
+import { Toaster } from "react-hot-toast";
+
 export const App = () => {
   return (
     <BrowserRouter>
       <div className="flex justify-center bg-lightBeige">
+        <Toaster />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<Signup />} />

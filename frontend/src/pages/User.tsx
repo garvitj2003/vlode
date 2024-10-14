@@ -2,6 +2,7 @@ import { User } from "lucide-react";
 import { useUserDetails } from "../hooks";
 import { BlogCard } from "../components/BlogCard";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UserPage = () => {
   const { userDetails, posts } = useUserDetails();
@@ -19,6 +20,7 @@ const UserPage = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
+    toast.success("Logged out!");
   };
 
   if (!userDetails) {

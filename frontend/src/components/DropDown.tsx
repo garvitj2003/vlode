@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp, Loader } from "lucide-react";
 import { useState } from "react";
 import { backendUrl } from "../config";
+import toast from "react-hot-toast";
 
 export const DropDown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,8 +24,9 @@ export const DropDown = () => {
         },
       });
       setLoading(false);
+      toast.success("Published!");
     } catch (e) {
-      console.log(e);
+      toast.error("couldn't Post blog");
     }
   };
 

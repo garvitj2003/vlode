@@ -6,6 +6,7 @@ import Quote from "../components/Quote";
 import axios from "axios";
 import { backendUrl } from "../config";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Signup = () => {
     } catch (e) {
       setLoading(false);
       // alert the user about req fail
-      alert("couldn't complete your request");
+      toast.error("couldn't complete your request");
     }
   };
 

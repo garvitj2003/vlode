@@ -6,6 +6,7 @@ import AuthCard from "../components/AuthCard";
 import axios from "axios";
 import { backendUrl } from "../config";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Signin = () => {
   const [input, setInput] = useState<SigninInput>({
@@ -27,9 +28,10 @@ const Signin = () => {
       localStorage.setItem("token", jwt);
       setLoading(false);
       navigate("/home");
+      toast.success("Logged in!");
     } catch (e) {
       setLoading(false);
-      alert("couldnt find user");
+      toast.error("User not found or incorrect password");
       // alert the user about req fail
     }
   };
