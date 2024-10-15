@@ -3,6 +3,7 @@ import { useUserDetails } from "../hooks";
 import { BlogCard } from "../components/BlogCard";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { UserPageSkeleton } from "../components/Skeleton";
 
 const UserPage = () => {
   const { userDetails, posts } = useUserDetails();
@@ -24,7 +25,7 @@ const UserPage = () => {
   };
 
   if (!userDetails) {
-    return <div>loading....</div>;
+    return <UserPageSkeleton />;
   }
   return (
     <div className="w-screen bg-white flex flex-col items-center p-6">

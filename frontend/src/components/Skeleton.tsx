@@ -44,3 +44,28 @@ export const PageSkeleton = () => {
     </div>
   );
 };
+
+export const UserPageSkeleton = () => {
+  return (
+    <div className="w-screen bg-white flex flex-col items-center p-6 animate-pulse">
+      <div className="max-w-3xl sticky top-2 bg-transparent backdrop-blur-lg z-20 w-full shadow-lg rounded-lg p-6 mb-8">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <div className="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center mr-6"></div>
+            <div>
+              <div className="h-6 bg-gray-300 rounded w-32 mb-1"></div>
+              <div className="h-4 bg-gray-200 rounded w-48"></div>
+            </div>
+          </div>
+          <div className="h-10 bg-red-100 rounded-full w-24"></div>
+        </div>
+      </div>
+
+      <div className="w-full lg:max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <Skeleton key={index} />
+        ))}
+      </div>
+    </div>
+  );
+};
