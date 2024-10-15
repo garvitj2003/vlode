@@ -19,12 +19,13 @@ const Landing = () => {
             Vlode
           </p>
           <div className="inline-flex items-baseline text-sm text-mediumGray gap-6 ">
-            <Link
-              to="/signup"
+            <a
+              href="https://handy-antique-370.notion.site/Project-Journal-Vlode-11eb447e1380801a9a21efb807b93c79"
+              target="_blank"
               className="hover:text-darkGray  invisible md:visible transition-all ease-in-out duration-500"
             >
-              Write
-            </Link>
+              About
+            </a>
             <Link
               to="/signin"
               className="hover:text-darkGray transition-all ease-in-out duration-500"
@@ -52,7 +53,10 @@ const Landing = () => {
           <h3 className="text-mediumGray text-lg md:text-xl tracking-tighter my-2 md:my-4">
             A Hub for Reading, Sharing & Inspiring Ideas!
           </h3>
-          <button className="hover:bg-black bg-darkGray transition-all ease-in-out duration-500 text-white px-4 py-2 md:px-6 md:my-2 font-semibold rounded-full">
+          <button
+            onClick={navigateToSignup}
+            className="hover:bg-black bg-darkGray transition-all ease-in-out duration-500 text-white px-4 py-2 md:px-6 md:my-2 font-semibold rounded-full"
+          >
             Start Reading
           </button>
         </div>
