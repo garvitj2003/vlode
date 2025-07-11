@@ -10,8 +10,19 @@ import { Toaster } from "react-hot-toast";
 export const App = () => {
   return (
     <BrowserRouter>
-      <div className="flex justify-center bg-lightBeige">
-        <Toaster />
+      <div className="min-h-screen">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#242424",
+              color: "#fff",
+              borderRadius: "12px",
+              fontFamily: "Poppins, sans-serif",
+            },
+          }}
+        />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<Signup />} />
@@ -24,4 +35,5 @@ export const App = () => {
     </BrowserRouter>
   );
 };
+
 export default App;
